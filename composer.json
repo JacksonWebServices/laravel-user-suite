@@ -4,7 +4,6 @@
     "description": "User Management in Laravel",
     "homepage":    "http://github.com/jacksonwebservices/laravel-user-suite",
     "license":     "MIT",
-
     "authors": [
         {
             "name": "Joshua Chandler",

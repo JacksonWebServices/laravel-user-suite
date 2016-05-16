@@ -54,6 +54,28 @@ class CreateUserSuiteTables extends Migration
                 ->onDelete('cascade');
             $table->primary(['role_id', 'user_id']);
         });
+        
+        Schema::create('attributes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('label')->nullable();
+            $table->timestamps();
+        });
+        
+        Schema::create('attribute_user', function (Blueprint $table) {
+            $table->integer('attribute_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->string('data');
+            $table->foreign('attribute_id')
+                ->references('id')
+                ->on('attributes')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->primary(['attribute_id', 'user_id']);
+        });
     }
     /**
      * Reverse the migrations.
