@@ -21,11 +21,7 @@ class UserSuiteServiceProvider extends ServiceProvider
     {
         $this->handleConfigs();
         $this->handleRoutes();
-        
-        // TODO: Handle publishing migrations
-        $this->publishes([
-            realpath(__DIR__ . './../migrations') => $this->app->databasePath() . '/migrations',
-        ]);
+        $this->handleMigrations();
     }
 
     /**
@@ -60,5 +56,12 @@ class UserSuiteServiceProvider extends ServiceProvider
     private function handleRoutes()
     {
         include __DIR__ . '/../routes.php';
+    }
+
+    private function handleMigrations()
+    {
+        $this->publishes([
+            realpath(__DIR__ . '/../migrations') => $this->app->databasePath() . '/migrations',
+        ]);
     }
 }

@@ -12,7 +12,7 @@ class CreateUserSuiteTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
@@ -20,14 +20,14 @@ class CreateUserSuiteTables extends Migration
             $table->timestamps();
         });
         
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
         
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->foreign('permission_id')
@@ -41,7 +41,7 @@ class CreateUserSuiteTables extends Migration
             $table->primary(['permission_Id', 'role_id']);
         });
         
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.role_user', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('role_id')
@@ -55,14 +55,14 @@ class CreateUserSuiteTables extends Migration
             $table->primary(['role_id', 'user_id']);
         });
         
-        Schema::create('attributes', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
         
-        Schema::create('attribute_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.database') . '.attribute_user', function (Blueprint $table) {
             $table->integer('attribute_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('data');
