@@ -2,7 +2,7 @@
     "name":        "jacksonwebservices/laravel-user-suite",
     "type":        "laravel-user-suite",
     "description": "User Management in Laravel",
-    "homepage":    "http://github.com/jacksonwebservices/laravel-user-suite",
+    "homepage":    "https://github.com/jacksonwebservices/laravel-user-suite",
     "license":     "MIT",
     "authors": [
         {
@@ -17,10 +17,7 @@
 
     "require": {
         "php": ">=5.4.0",
-        "illuminate/auth": "~5.0",
-        "illuminate/config": "~5.0",
-        "illuminate/database": "~5.0",
-        "illuminate/support": "~5.0"
+        "laravel/framework": ">=5.0"
     },
 
     "require-dev": {
