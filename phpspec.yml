@@ -1,0 +1,4 @@
+suites:
+  library_suite:
+    namespace: JWS\UserSuite\Tests
+    psr4_prefix: JWS\UserSuite\Tests
