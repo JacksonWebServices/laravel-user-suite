@@ -1,8 +1,6 @@
 <?php
 
 return [
-
-    'database' => env('DB_DATABASE', 'forge'),
     
     'users' => [
         'driver' => 'eloquent',
