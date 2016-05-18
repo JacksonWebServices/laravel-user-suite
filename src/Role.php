@@ -20,7 +20,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(config('usersuite.users.model'));
+        return $this->hasMany(config('usersuite.users.model'));
     }
 
     /**

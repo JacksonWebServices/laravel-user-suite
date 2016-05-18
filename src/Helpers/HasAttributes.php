@@ -7,7 +7,6 @@ use JWS\UserSuite\Attribute;
  * Class HasAttributes
  * @package JWS\UserSuite\Helpers
  * 
- * TODO: Remove attribute from user
  * TODO: Get data from attribute
  */
 trait HasAttributes
@@ -33,6 +32,23 @@ trait HasAttributes
         return $this->attributes()->save(
             Attribute::whereName($attribute)->firstOrFail()
         );
+    }
+
+    /**
+     * Remove the given attribute from the user.
+     * 
+     * @param string $attribute
+     * @return mixed
+     */
+    public function removeAttribute($attribute)
+    {
+        if ($this->hasAttribute($attribute)) {
+            foreach ($this->attributes as $attr) {
+                if ($attr->name == $attribute) {
+                    $attr->pivot->delete();
+                }
+            }
+        }
     }
 
     /**
