@@ -1,8 +1,9 @@
 <?php
+
 namespace JWS\UserSuite\Helpers;
 
-use JWS\UserSuite\Role;
 use JWS\UserSuite\Permission;
+use JWS\UserSuite\Role;
 
 trait HasRoles
 {
@@ -19,7 +20,8 @@ trait HasRoles
     /**
      * Assign the given role to the user.
      *
-     * @param  string $role
+     * @param string $role
+     *
      * @return mixed
      */
     public function assignRole($role)
@@ -32,13 +34,14 @@ trait HasRoles
     /**
      * Remove the given role from the user.
      *
-     * @param  string $role
+     * @param string $role
+     *
      * @return mixed
      */
     public function removeRole($role)
     {
         if ($this->hasRole($role)) {
-            foreach($this->roles as $r) {
+            foreach ($this->roles as $r) {
                 if ($r->name == $role) {
                     $r->pivot->delete();
                 }
@@ -49,22 +52,25 @@ trait HasRoles
     /**
      * Determine if the user has the given role.
      *
-     * @param  mixed $role
-     * @return boolean
+     * @param mixed $role
+     *
+     * @return bool
      */
     public function hasRole($role)
     {
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-        return !! $role->intersect($this->roles)->count();
+
+        return (bool) $role->intersect($this->roles)->count();
     }
 
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param  Permission $permission
-     * @return boolean
+     * @param Permission $permission
+     *
+     * @return bool
      */
     public function hasPermission(Permission $permission)
     {
