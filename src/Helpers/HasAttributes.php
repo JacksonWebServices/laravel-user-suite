@@ -1,9 +1,10 @@
 <?php
+
 namespace JWS\UserSuite\Helpers;
 
 use JWS\UserSuite\Attribute;
 
-/** 
+/**
  * Class HasAttributes
  * @package JWS\UserSuite\Helpers
  * 
@@ -24,7 +25,8 @@ trait HasAttributes
     /**
      * Assign the given attribute to the user.
      *
-     * @param  string $attribute
+     * @param string $attribute
+     *
      * @return mixed
      */
     public function assignAttribute($attribute)
@@ -54,14 +56,16 @@ trait HasAttributes
     /**
      * Determine if the user has the given attribute.
      *
-     * @param  mixed $attribute
-     * @return boolean
+     * @param mixed $attribute
+     *
+     * @return bool
      */
     public function hasAttribute($attribute)
     {
         if (is_string($attribute)) {
             return $this->attributes->contains('name', $attribute);
         }
-        return !! $attribute->intersect($this->attributes)->count();
+
+        return (bool) $attribute->intersect($this->attributes)->count();
     }
 }

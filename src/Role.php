@@ -1,4 +1,5 @@
 <?php
+
 namespace JWS\UserSuite;
 
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,8 @@ class Role extends Model
     /**
      * Grant the given permission to a role.
      *
-     * @param  Permission $permission
+     * @param Permission $permission
+     *
      * @return mixed
      */
     public function givePermissionTo(Permission $permission)

@@ -1,4 +1,5 @@
 <?php
+
 namespace JWS\UserSuite;
 
 use Illuminate\Support\ServiceProvider;
@@ -46,7 +47,7 @@ class UserSuiteServiceProvider extends ServiceProvider
 
     private function handleConfigs()
     {
-        $configPath = __DIR__ . '/../config/usersuite.php';
+        $configPath = __DIR__.'/../config/usersuite.php';
 
         $this->publishes([$configPath => config_path('usersuite.php')]);
 
@@ -55,7 +56,7 @@ class UserSuiteServiceProvider extends ServiceProvider
 
     private function handleRoutes()
     {
-        include __DIR__ . '/../routes.php';
+        include __DIR__.'/../routes.php';
     }
 
     private function handleMigrations()

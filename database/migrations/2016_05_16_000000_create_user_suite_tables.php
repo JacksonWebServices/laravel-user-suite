@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateUserSuiteTables extends Migration
 {
@@ -19,14 +19,14 @@ class CreateUserSuiteTables extends Migration
             $table->integer('level')->default(0);
             $table->timestamps();
         });
-        
+
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
-        
+
         Schema::create('permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
@@ -47,7 +47,7 @@ class CreateUserSuiteTables extends Migration
             $table->string('label')->nullable();
             $table->timestamps();
         });
-        
+
         Schema::create('attribute_user', function (Blueprint $table) {
             $table->integer('attribute_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -71,6 +71,7 @@ class CreateUserSuiteTables extends Migration
                 ->onDelete('set null');
         });
     }
+
     /**
      * Reverse the migrations.
      *
