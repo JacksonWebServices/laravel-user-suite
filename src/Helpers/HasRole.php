@@ -2,7 +2,6 @@
 namespace JWS\UserSuite\Helpers;
 
 use JWS\UserSuite\Role;
-use JWS\UserSuite\Permission;
 
 trait HasRole
 {

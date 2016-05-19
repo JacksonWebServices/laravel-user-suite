@@ -17,11 +17,11 @@ class Role extends Model
     }
 
     /**
-     * A role may be associated with many users.
+     * A role may have many users.
      */
     public function users()
     {
-        return $this->hasMany(config('usersuite.users.model'));
+        return $this->hasMany(config('usersuite.users'));
     }
 
     /**
