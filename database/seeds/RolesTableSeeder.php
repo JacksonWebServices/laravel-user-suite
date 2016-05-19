@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use DB;
 
-class RolesTableSeeder extends Seeder
+class AttributesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,16 +11,14 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'name' => 'admin',
-            'label' => 'Site Administrator',
-            'level' => 100
+        \DB::table('attributes')->insert([
+            'name' => 'give_permission',
+            'label' => 'Give Permission to User',
         ]);
 
-        DB::table('roles')->insert([
-            'name' => 'user',
-            'label' => 'Generic User',
-            'level' => 1
+        \DB::table('roles')->insert([
+            'name' => 'remove_permission',
+            'label' => 'Removes a Permission from a User',
         ]);
     }
 }
