@@ -7,17 +7,41 @@ There are 3 models included in the laravel-user-suite
 Attribute
 =========
 
-* namespace: `JWS\UserSuite\Attribute`
+.. code-block:: php
+   :linenos:
+
+   <?php
+
+   namespace JWS\UserSuite;
+
+   class Attribute extends Model
+   {
 
 
 Permission
 ==========
 
-* namespace: `JWS\UserSuite\Permission`
+.. code-block:: php
+   :linenos:
+
+   <?php
+
+   namespace JWS\UserSuite;
+
+   class Permission extends Model
+   {
 
 
 Role
 ====
 
-* namespace: `JWS\UserSuite\Role`
+.. code-block:: php
+   :linenos:
+
+   <?php
+
+   namespace JWS\UserSuite;
+
+   class Role extends Model
+   {
 
