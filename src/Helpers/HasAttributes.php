@@ -8,7 +8,6 @@ use JWS\UserSuite\Attribute;
  * Class HasAttributes
  * @package JWS\UserSuite\Helpers
  * 
- * TODO: Get data from attribute
  */
 trait HasAttributes
 {
@@ -19,40 +18,24 @@ trait HasAttributes
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_user');
+        return $this->belongsToMany(Attribute::class, 'attribute_user')->withPivot('attribute_id', 'user_id', 'data');
     }
 
     /**
      * Assign the given attribute to the user.
      *
      * @param string $attribute
-     *
+     * @param mixed $data
      * @return mixed
      */
-    public function assignAttribute($attribute)
+    public function assignAttribute($attribute, $data)
     {
         return $this->attributes()->save(
-            Attribute::whereName($attribute)->firstOrFail()
+            Attribute::whereName($attribute)->firstOrFail(), 
+            ['data' => $data]
         );
     }
-
-    /**
-     * Remove the given attribute from the user.
-     * 
-     * @param string $attribute
-     * @return mixed
-     */
-    public function removeAttribute($attribute)
-    {
-        if ($this->hasAttribute($attribute)) {
-            foreach ($this->attributes as $attr) {
-                if ($attr->name == $attribute) {
-                    $attr->pivot->delete();
-                }
-            }
-        }
-    }
-
+    
     /**
      * Determine if the user has the given attribute.
      *

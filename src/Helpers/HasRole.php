@@ -12,7 +12,7 @@ trait HasRole
      */
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsToMany(Role::class, 'role_id');
     }
 
     /**

@@ -12,22 +12,36 @@ class CreateUserSuiteTables extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('label')->nullable();
-            $table->integer('level')->default(0);
-            $table->timestamps();
-        });
-
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.' . 'roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.' . 'role_user', function (Blueprint $table) {
+            $table->integer('role_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('role_id')
+                ->references('id')
+                ->on('roles')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->primary(['role_id', 'user_id']);
+        });
+
+        Schema::create(config('usersuite.db') . '.' . 'permissions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('label')->nullable();
+            $table->boolean('is_protected')->default(true);
+            $table->timestamps();
+        });
+
+        Schema::create(config('usersuite.db') . '.' . 'permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->foreign('permission_id')
@@ -40,18 +54,19 @@ class CreateUserSuiteTables extends Migration
                 ->onDelete('cascade');
             $table->primary(['permission_id', 'role_id']);
         });
-
-        Schema::create('attributes', function (Blueprint $table) {
+        
+        Schema::create(config('usersuite.db') . '.' . 'attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
+            $table->boolean('is_unique')->default(true);
             $table->timestamps();
         });
 
-        Schema::create('attribute_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.' . 'attribute_user', function (Blueprint $table) {
             $table->integer('attribute_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('data');
+            $table->string('data')->default(1);
             $table->foreign('attribute_id')
                 ->references('id')
                 ->on('attributes')
@@ -60,15 +75,7 @@ class CreateUserSuiteTables extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->primary(['attribute_id', 'user_id']);
-        });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role_id')->unsigned()->nullable();
-            $table->foreign('role_id')
-                ->references('id')
-                ->on('roles')
-                ->onDelete('set null');
+            $table->primary(['attribute_id', 'user_id', 'data']);
         });
     }
 
@@ -80,14 +87,10 @@ class CreateUserSuiteTables extends Migration
     public function down()
     {
         Schema::drop('roles');
+        Schema::drop('role_user');
         Schema::drop('permissions');
         Schema::drop('permission_role');
         Schema::drop('attributes');
         Schema::drop('attribute_user');
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColumn('role_id');
-        });
     }
 }

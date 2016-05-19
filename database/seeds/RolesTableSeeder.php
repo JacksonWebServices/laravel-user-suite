@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AttributesTableSeeder extends Seeder
+class RolesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,14 +11,9 @@ class AttributesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('attributes')->insert([
-            'name' => 'give_permission',
-            'label' => 'Give Permission to User',
-        ]);
-
-        \DB::table('roles')->insert([
-            'name' => 'remove_permission',
-            'label' => 'Removes a Permission from a User',
+        \DB::table(config('usersuite.db') . '.' . 'roles')->insert([
+            'name' => 'admin',
+            'label' => 'Site Administrator',
         ]);
     }
 }
