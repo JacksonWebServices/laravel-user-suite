@@ -1,0 +1,3 @@
+pages:
+  - ['Getting Started': index.md]
+  - ['Models': models.md]
