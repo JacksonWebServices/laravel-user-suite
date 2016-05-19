@@ -9,9 +9,4 @@ The laravel-user-suite is a Laravel package to manage users.  It has Roles, Perm
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`models`
-    * :ref:`attributes`
-    * :ref:`permissions`
-    * :ref:`roles`
 * :ref:`search`
