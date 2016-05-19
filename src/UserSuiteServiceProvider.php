@@ -21,7 +21,6 @@ class UserSuiteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->handleConfigs();
-        $this->handleRoutes();
         $this->handleMigrations();
     }
 
@@ -53,12 +52,7 @@ class UserSuiteServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom($configPath, 'usersuite');
     }
-
-    private function handleRoutes()
-    {
-        include __DIR__.'/../routes.php';
-    }
-
+    
     private function handleMigrations()
     {
         $this->publishes([
