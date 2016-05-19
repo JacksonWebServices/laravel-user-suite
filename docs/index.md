@@ -5,4 +5,6 @@ The laravel-user-suite is a Laravel package to manage users.  It has Roles, Perm
 
 
 Contents:
+
+
 * :ref:`models`
