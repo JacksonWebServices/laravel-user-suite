@@ -8,40 +8,22 @@ Attribute
 =========
 
 .. code-block:: php
-   :linenos:
 
-   <?php
-
-   namespace JWS\UserSuite;
-
-   class Attribute extends Model
-   {
+   use JWS\UserSuite\Attribute;
 
 
 Permission
 ==========
 
 .. code-block:: php
-   :linenos:
 
-   <?php
-
-   namespace JWS\UserSuite;
-
-   class Permission extends Model
-   {
+   use JWS\UserSuite\Permission;
 
 
 Role
 ====
 
 .. code-block:: php
-   :linenos:
 
-   <?php
-
-   namespace JWS\UserSuite;
-
-   class Role extends Model
-   {
+   use JWS\UserSuite\Role;
 
