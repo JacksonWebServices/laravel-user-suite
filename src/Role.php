@@ -1,6 +1,4 @@
-<?php
-
-namespace JWS\UserSuite;
+<?php namespace JWS\UserSuite;
 
 use Illuminate\Database\Eloquent\Model;
 
