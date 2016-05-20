@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+
+    private $usersuite = config('usersuite');
+
+    protected  $table = 'laravelusersuite.roles1234';
     /**
      * A role may be given various permissions.
      *
@@ -21,7 +25,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(config('usersuite.users'));
+        return $this->belongsToMany(config('usersuite.users.model'));
     }
 
     /**
@@ -36,15 +40,15 @@ class Role extends Model
         return $this->permissions()->save($permission);
     }
 
-        /**
-     * Grant the given permission to a role.
+     /**
+     * Remove the given permission to a role.
      *
      * @param Permission $permission
      *
      * @return mixed
      */
-    public function removePermissionTo(Permission $permission)
+    public function assignRoleTo(User $user)
     {
-        return $this->permissions()->delete($permission);
+        return $this->users()->save($user);
     }
 }

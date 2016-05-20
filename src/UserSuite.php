@@ -1,4 +1,6 @@
-<?php namespace JWS\UserSuite;
+<?php 
+
+namespace JWS\UserSuite;
 
 trait UserSuite
 {

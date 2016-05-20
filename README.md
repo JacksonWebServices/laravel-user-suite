@@ -28,3 +28,17 @@ This uses the default `App\User` model by default, but you can change that to wh
 $ php artisan vendor:migrate 
 ```
 
+### Update User Model
+
+Add UserSuite Trait to the user model
+
+```
+use JWS\UserSuite\UserSuite;
+
+class User extends Authenticatable
+{
+     use UserSuite;
+```
+
+
+
