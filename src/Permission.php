@@ -15,4 +15,14 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+    /**
+     * Show whether the permission is protected
+     * 
+     * @return bool
+     */
+    public function isProtected()
+    {
+        return (bool) $this->is_protected;
+    }
 }
