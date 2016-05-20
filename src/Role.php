@@ -35,4 +35,16 @@ class Role extends Model
     {
         return $this->permissions()->save($permission);
     }
+
+        /**
+     * Grant the given permission to a role.
+     *
+     * @param Permission $permission
+     *
+     * @return mixed
+     */
+    public function removePermissionTo(Permission $permission)
+    {
+        return $this->permissions()->delete($permission);
+    }
 }
