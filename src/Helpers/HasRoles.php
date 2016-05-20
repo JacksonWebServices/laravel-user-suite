@@ -3,16 +3,16 @@ namespace JWS\UserSuite\Helpers;
 
 use JWS\UserSuite\Role;
 
-trait HasRole
+trait HasRoles
 {
     /**
      * A user may have a single role.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function role()
+    public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_id');
+        return $this->belongsToMany(Role::class, 'role_user');
     }
 
     /**
