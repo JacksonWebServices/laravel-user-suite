@@ -22,6 +22,7 @@ class CreateUserSuiteTables extends Migration
         Schema::create(config('usersuite.db') . '.role_user', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->boolean('is_primary')->default(false);
             $table->foreign('role_id')
                 ->references('id')
                 ->on('roles')
