@@ -12,14 +12,14 @@ class CreateUserSuiteTables extends Migration
      */
     public function up()
     {
-        Schema::create(config('usersuite.db') . '.' . 'roles', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
             $table->timestamps();
         });
 
-        Schema::create(config('usersuite.db') . '.' . 'role_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.role_user', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('role_id')
@@ -28,12 +28,12 @@ class CreateUserSuiteTables extends Migration
                 ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
+                ->on(config('usersuite.users.db').'.users')
                 ->onDelete('cascade');
-            $table->primary(['role_id', 'user_id']);
+            $table->primary(['role_id', 'user_id'], 'role_user_primary');
         });
 
-        Schema::create(config('usersuite.db') . '.' . 'permissions', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
@@ -41,7 +41,7 @@ class CreateUserSuiteTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('usersuite.db') . '.' . 'permission_role', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->foreign('permission_id')
@@ -52,10 +52,10 @@ class CreateUserSuiteTables extends Migration
                 ->references('id')
                 ->on('roles')
                 ->onDelete('cascade');
-            $table->primary(['permission_id', 'role_id']);
+            $table->primary(['permission_id', 'role_id'], 'permission_role_primary');
         });
         
-        Schema::create(config('usersuite.db') . '.' . 'attributes', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
@@ -63,7 +63,7 @@ class CreateUserSuiteTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('usersuite.db') . '.' . 'attribute_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.db') . '.attribute_user', function (Blueprint $table) {
             $table->integer('attribute_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('data')->default(1);
@@ -73,10 +73,35 @@ class CreateUserSuiteTables extends Migration
                 ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users')
+                ->on(config('usersuite.users.db').'.users')
                 ->onDelete('cascade');
-            $table->primary(['attribute_id', 'user_id', 'data']);
+            $table->primary(['attribute_id', 'user_id', 'data'], 'attribute_user_data_primary');
         });
+
+        // Required Seeding
+        \DB::table(config('usersuite.db') . '.roles')->insert([
+            'name' => 'admin',
+            'label' => 'Site Administrator',
+        ]);
+
+        \DB::table(config('usersuite.db') . '.roles')->insert([
+            'name' => 'user',
+            'label' => 'User',
+        ]);
+
+        \DB::table(config('usersuite.db') . '.attributes')->insert([
+            'name' => 'give_permission',
+            'label' => 'Give Permission to User',
+            'is_unique' => 0
+        ]);
+
+        \DB::table(config('usersuite.db') . '.attributes')->insert([
+            'name' => 'remove_permission',
+            'label' => 'Removes a Permission from a User',
+            'is_unique' => 0
+        ]);
+
+
     }
 
     /**
@@ -86,11 +111,11 @@ class CreateUserSuiteTables extends Migration
      */
     public function down()
     {
-        Schema::drop('roles');
-        Schema::drop('role_user');
-        Schema::drop('permissions');
-        Schema::drop('permission_role');
-        Schema::drop('attributes');
-        Schema::drop('attribute_user');
+        Schema::drop(config('usersuite.db') . '.attribute_user');
+        Schema::drop(config('usersuite.db') . '.role_user');        
+        Schema::drop(config('usersuite.db') . '.permission_role');
+        Schema::drop(config('usersuite.db') . '.attributes');
+        Schema::drop(config('usersuite.db') . '.permissions');
+        Schema::drop(config('usersuite.db') . '.roles');
     }
 }
