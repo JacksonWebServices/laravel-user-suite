@@ -13,4 +13,14 @@ class Attribute extends Model
     {
         return $this->belongsToMany(config('usersuite.users.model'));
     }
+
+    /**
+     * Show whether the attribute is unique
+     * 
+     * @return bool
+     */
+    public function isUnique()
+    {
+        return (bool) $this->is_unique;
+    }
 }
