@@ -8,6 +8,8 @@ class Attribute extends Model
 {
     /**
      * A role may be associated with one user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
     {

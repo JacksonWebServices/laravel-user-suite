@@ -15,5 +15,9 @@ class RolesTableSeeder extends Seeder
             'name' => 'admin',
             'label' => 'Site Administrator',
         ]);
+        \DB::table(config('usersuite.db') . '.' . 'roles')->insert([
+            'name' => 'user',
+            'label' => 'Generic User',
+        ]);
     }
 }
