@@ -31,7 +31,7 @@ class Role extends Model
      *
      * @return mixed
      */
-    public function givePermissionTo(Permission $permission)
+    public function givePermission(Permission $permission)
     {
         return $this->permissions()->save($permission);
     }

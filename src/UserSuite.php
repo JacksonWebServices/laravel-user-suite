@@ -1,16 +1,30 @@
-<?php
+<?php namespace JWS\UserSuite;
 
-namespace JWS\UserSuite\Helpers;
-
-use JWS\UserSuite\Attribute;
-
-/**
- * Class HasAttributes
- * @package JWS\UserSuite\Helpers
- * 
- */
-trait HasAttributes
+trait UserSuite
 {
+    /**
+     * A user may have a single role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user');
+    }
+
+    /**
+     * Assign the given role to the user.
+     *
+     * @param  string  $role
+     * @return mixed
+     */
+    public function assignRole($role)
+    {
+        return $this->role()->save(
+            Role::whereName($role)->firstOrFail()
+        );
+    }
+    
     /**
      * A user may have multiple attributes.
      *
@@ -31,11 +45,11 @@ trait HasAttributes
     public function assignAttribute($attribute, $data)
     {
         return $this->attributes()->save(
-            Attribute::whereName($attribute)->firstOrFail(), 
+            Attribute::whereName($attribute)->firstOrFail(),
             ['data' => $data]
         );
     }
-    
+
     /**
      * Determine if the user has the given attribute.
      *
