@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
 
-    private $usersuite = config('usersuite');
+    //private $usersuite = config('usersuite').'role';
 
-    protected  $table = 'laravelusersuite.roles1234';
+    protected  $table = config('usersuite').'role';
     /**
      * A role may be given various permissions.
      *
