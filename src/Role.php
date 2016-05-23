@@ -9,7 +9,7 @@ class Role extends Model
 
     //private $usersuite = config('usersuite').'role';
 
-    protected  $table = config('usersuite').'role';
+    protected  $table = config('usersuite').'.role';
     /**
      * A role may be given various permissions.
      *
