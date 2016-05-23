@@ -10,10 +10,10 @@ $ composer require jacksonwebservices/laravel-user-suite
 Register this provider `JWS\UserSuite\UserSuiteServiceProvider::class` in app.php
 
 
-### Publishing migrations and configuration
+### Publish Files
 
 ```
-$ php artisan vendor:publish --provider=JWS\UserSuite\UserSuiteServiceProvider
+$ php artisan vendor:publish
 ```
 
 ### Config file
@@ -21,3 +21,24 @@ $ php artisan vendor:publish --provider=JWS\UserSuite\UserSuiteServiceProvider
 If you want to change the migration schema to something other than the default change the `database` configuration setting.
 
 This uses the default `App\User` model by default, but you can change that to whatever user model fits your project.  
+
+### Migrate Files
+
+```
+$ php artisan vendor:migrate 
+```
+
+### Update User Model
+
+Add UserSuite Trait to the user model
+
+```
+use JWS\UserSuite\UserSuite;
+
+class User extends Authenticatable
+{
+     use UserSuite;
+```
+
+
+

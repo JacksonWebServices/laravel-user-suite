@@ -22,7 +22,6 @@ class UserSuiteServiceProvider extends ServiceProvider
     {
         $this->handleConfigs();
         $this->handleMigrations();
-        $this->handleSeeds();
     }
 
     /**
@@ -58,13 +57,6 @@ class UserSuiteServiceProvider extends ServiceProvider
     {
         $this->publishes([
             realpath(__DIR__ . '/../database/migrations') => $this->app->databasePath() . '/migrations',
-        ]);
-    }
-    
-    private function handleSeeds()
-    {
-        $this->publishes([
-            realpath(__DIR__ . '/../database/seeds') => $this->app->databasePath() . '/seeds',
         ]);
     }
 }
