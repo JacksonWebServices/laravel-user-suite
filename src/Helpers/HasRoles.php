@@ -3,7 +3,8 @@
 use JWS\UserSuite\Role;
 use JWS\UserSuite\Permission;
 
-class PrimaryRoleMissingException extends \Exception {}
+use JWS\UserSuite\PrimaryRoleMissingException;
+
 
 trait HasRoles
 {

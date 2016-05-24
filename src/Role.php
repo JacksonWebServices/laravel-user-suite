@@ -4,6 +4,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param  array  $attributes
+     * @return void
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct();
+        $this->table = config('usersuite.db') . '.roles';
+    }
+    
     /**
      * A role may be given various permissions.
      *
