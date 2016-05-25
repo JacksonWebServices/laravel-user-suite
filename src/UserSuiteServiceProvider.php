@@ -56,7 +56,7 @@ class UserSuiteServiceProvider extends ServiceProvider
     private function handleMigrations()
     {
         $this->publishes([
-            realpath(__DIR__ . '/../database/migrations') => $this->app->databasePath() . '/migrations',
+            realpath(__DIR__ . '/../database') => $this->app->databasePath() . '/migrations',
         ]);
     }
 }
