@@ -15,7 +15,8 @@ trait HasRoles
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_user')->withPivot('role_id', 'user_id', 'is_primary');
+        return $this->belongsToMany(Role::class, config('usersuite.db').'.role_user')
+            ->withPivot('role_id', 'user_id', 'is_primary');
     }
 
     /**

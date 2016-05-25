@@ -23,7 +23,7 @@ class Attribute extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(config('usersuite.users.model'));
+        return $this->belongsToMany(config('usersuite.users.model'), config('usersuite.users.db').'.attribute_user');
     }
 
     /**

@@ -24,7 +24,7 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(Permission::class, config('usersuite.db').'.permission_role');
     }
 
     /**
@@ -32,7 +32,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(config('usersuite.users.model'));
+        return $this->belongsToMany(config('usersuite.users.model'), config('usersuite.users.db').'.role_user');
     }
 
     /**

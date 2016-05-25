@@ -11,7 +11,7 @@ trait HasAttributes
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_user')->withPivot('attribute_id', 'user_id', 'data');
+        return $this->belongsToMany(Attribute::class, config('usersuite.db').'.attribute_user')->withPivot('attribute_id', 'user_id', 'data');
     }
 
     /**
