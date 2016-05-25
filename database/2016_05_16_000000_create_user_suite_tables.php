@@ -25,7 +25,7 @@ class CreateUserSuiteTables extends Migration
             $table->boolean('is_primary')->default(false);
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles')
+                ->on(config('usersuite.db').'.roles')
                 ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
@@ -47,16 +47,16 @@ class CreateUserSuiteTables extends Migration
             $table->integer('role_id')->unsigned();
             $table->foreign('permission_id')
                 ->references('id')
-                ->on('permissions')
+                ->on(config('usersuite.db').'.permissions')
                 ->onDelete('cascade');
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles')
+                ->on(config('usersuite.db').'.roles')
                 ->onDelete('cascade');
             $table->primary(['permission_id', 'role_id'], 'permission_role_primary');
         });
         
-        Schema::create(config('usersuite.db') . '.attributes', function (Blueprint $table) {
+        Schema::create(config('usersuite.db').'.attributes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('label')->nullable();
@@ -64,13 +64,13 @@ class CreateUserSuiteTables extends Migration
             $table->timestamps();
         });
 
-        Schema::create(config('usersuite.db') . '.attribute_user', function (Blueprint $table) {
+        Schema::create(config('usersuite.db').'.attribute_user', function (Blueprint $table) {
             $table->integer('attribute_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('data')->default(1);
             $table->foreign('attribute_id')
                 ->references('id')
-                ->on('attributes')
+                ->on(config('usersuite.db').'.attributes')
                 ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
