@@ -39,13 +39,25 @@ trait HasAttributes
      */
     public function findAttribute($attribute)
     {
-        $attribute = $this->attributes()->whereName($attribute);
+        return $this->attributes()->whereName($attribute)->get();
+    }
 
-        if ($attribute->count() == 1) {
-            return $attribute->first();
-        } else {
-            return $attribute->get();
+    /**
+     * Get the attribute's data.
+     * 
+     * @param string $attribute
+     * @return array $data
+     */
+    public function findAttributeData($attribute)
+    {
+        $attributes = $this->findAttribute($attribute);
+        
+        $data = array();
+        foreach($attributes as $attribute) {
+            array_push($data, $attribute->pivot->data);
         }
+        
+        return $data;
     }
 
     /**
