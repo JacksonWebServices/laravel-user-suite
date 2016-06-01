@@ -1,5 +1,6 @@
 <?php namespace JWS\UserSuite\Helpers;
 
+use Illuminate\Database\Eloquent\Collection;
 use JWS\UserSuite\Attribute;
 
 trait HasAttributes
@@ -11,7 +12,8 @@ trait HasAttributes
      */
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class, config('usersuite.db').'.attribute_user')->withPivot('attribute_id', 'user_id', 'data');
+        return $this->belongsToMany(Attribute::class, config('usersuite.db').'.attribute_user')
+            ->withPivot('attribute_id', 'user_id', 'data');
     }
 
     /**
@@ -27,6 +29,23 @@ trait HasAttributes
             Attribute::whereName($attribute)->firstOrFail(),
             ['data' => $data]
         );
+    }
+
+    /**
+     * Get a given attribute.
+     *
+     * @param string $attribute
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function findAttribute($attribute)
+    {
+        $attribute = $this->attributes()->whereName($attribute);
+
+        if ($attribute->count() == 1) {
+            return $attribute->first();
+        } else {
+            return $attribute->get();
+        }
     }
 
     /**
